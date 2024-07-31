@@ -3,7 +3,7 @@ WORKDIR /app
 
 # https://tailscale.com/kb/1118/custom-derp-servers/
 # version: https://pkg.go.dev/tailscale.com/cmd/derper
-RUN go install tailscale.com/cmd/derper@v1.66.4
+RUN go install tailscale.com/cmd/derper@v1.70.0
 
 FROM ubuntu:22.04
 WORKDIR /app
@@ -24,15 +24,15 @@ RUN apt update && \
     apt install -y tailscale && \
     chmod +x ./init.sh
 
-ENV DERP_DOMAIN your-hostname.com
-ENV DERP_CERT_MODE letsencrypt
-ENV DERP_CERT_DIR /app/certs
-ENV DERP_ADDR :443
-ENV DERP_STUN true
-ENV DERP_STUN_PORT 3478
-ENV DERP_HTTP_PORT 80
-ENV DERP_VERIFY_CLIENTS false
-ENV TAILSCALE_AUTH_KEY 111
+ENV DERP_DOMAIN=your-hostname.com
+ENV DERP_CERT_MODE=letsencrypt
+ENV DERP_CERT_DIR=/app/certs
+ENV DERP_ADDR=:443
+ENV DERP_STUN=true
+ENV DERP_STUN_PORT=3478
+ENV DERP_HTTP_PORT=80
+ENV DERP_VERIFY_CLIENTS=false
+ENV TAILSCALE_AUTH_KEY=111
 
 COPY --from=builder /go/bin/derper .
 
