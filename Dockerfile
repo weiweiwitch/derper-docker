@@ -3,9 +3,9 @@ WORKDIR /app
 
 # https://tailscale.com/kb/1118/custom-derp-servers/
 # version: https://pkg.go.dev/tailscale.com/cmd/derper
-RUN go install tailscale.com/cmd/derper@v1.90.6
+RUN go install tailscale.com/cmd/derper@v1.92.4
 
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 WORKDIR /app
 
 LABEL app=tailscale-derper
@@ -18,8 +18,8 @@ RUN apt update && \
     apt install -y --no-install-recommends apt-utils && \
     apt install -y ca-certificates curl && \
     mkdir /app/certs && \
-    curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/jammy.noarmor.gpg | tee /usr/share/keyrings/tailscale-archive-keyring.gpg >/dev/null && \
-    curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/jammy.tailscale-keyring.list | tee /etc/apt/sources.list.d/tailscale.list && \
+    curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/noble.noarmor.gpg | tee /usr/share/keyrings/tailscale-archive-keyring.gpg >/dev/null && \
+    curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/noble.tailscale-keyring.list | tee /etc/apt/sources.list.d/tailscale.list && \
     apt update && \
     apt install -y tailscale && \
     chmod +x ./init.sh
