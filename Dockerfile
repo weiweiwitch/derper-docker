@@ -3,7 +3,7 @@ WORKDIR /app
 
 # https://tailscale.com/kb/1118/custom-derp-servers/
 # version: https://pkg.go.dev/tailscale.com/cmd/derper
-RUN go install tailscale.com/cmd/derper@v1.92.4
+RUN go install tailscale.com/cmd/derper@v1.94.1
 
 FROM ubuntu:24.04
 WORKDIR /app
